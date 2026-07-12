@@ -1,0 +1,27 @@
+name: 每日天气推送
+
+on:
+  schedule:
+    # 每天早上 7:30 (北京时间 UTC+8 = UTC 23:30)
+    - cron: '30 23 * * *'
+  workflow_dispatch:  # 允许手动触发测试
+
+jobs:
+  send-weather:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 获取天气并发送到钉钉
+        env:
+          WEBHOOK_URL: ${{ secrets.DINGTALK_WEBHOOK_URL }}
+          CITY: 淄博
+        run: python daily_weather_github.py

@@ -22,7 +22,7 @@ def get_weather() -> str:
         r = requests.get(
             "https://restapi.amap.com/v3/weather/weatherInfo",
             params={
-                "key": "a3c6ef0b9f79b7b7b7b7b7b7b7b7b7b7",
+                "key": "7e89297c445e7e1918ffa324c3ee67c8",
                 "city": CITY,
                 "extensions": "all"
             },
